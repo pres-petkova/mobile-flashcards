@@ -1,23 +1,18 @@
 import React from "react";
-import { Button, TouchableOpacity, Text, View } from "react-native";
-import { addDeck, getDecks } from "../utils/api";
+import { Button, Text, View } from "react-native";
+import DeckList from "../components/DeckList";
+import Deck from "../components/Deck"
 
 export default function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={ { flex: 1, alignItems: "center", justifyContent: "center" } }>
       <Text>Home Screen</Text>
       <Button
         title="Go to Details"
-        onPress={() => navigation.navigate("Details")}
+        onPress={ () => navigation.navigate("Details") }
       />
-
-      <TouchableOpacity onPress={() => addDeck()}>
-        <Text>Save String</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => getDecks()}>
-        <Text>Read String</Text>
-      </TouchableOpacity>
+      <Deck />
+      <DeckList />
     </View>
   );
 }

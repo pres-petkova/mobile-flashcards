@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   TextInput,
   StyleSheet,
@@ -8,42 +9,45 @@ import {
 } from "react-native";
 import { addDeck } from "../utils/api";
 
-class AddDeck extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { title: "" };
-  }
-  
-  handleSubmit = (title) => {
-    addDeck(title);
-  };
-  handleTextChange = (title) => {
-    this.setState({ title });
+function AddDeck({ navigation }) {
+
+  const [title, setTitle] = useState();
+
+
+  const handleSubmit = async () => {
+    if (title) {
+      await addDeck(title);
+      navigation.push("Home");
+    }
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <TextInput
-          style={styles.input}
-          underlineColorAndroid="transparent"
-          placeholder="Enter Your Deck's Title"
-          placeholderTextColor="#9a73ef"
-          autoCapitalize="none"
-          onChangeText={this.handleSubmit}
-        />
+  const handleTextChange = (title) => {
+    setTitle(title);
+  };
 
-        <TouchableOpacity
-          style={styles.submitButton}
-          onPress={() => this.setState(title)}
-          
-        >
-          
-          <Text style={styles.submitButtonText}> Submit </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+
+  return (
+    <View style={ styles.container }>
+      <TextInput
+        style={ styles.input }
+        underlineColorAndroid="transparent"
+        placeholder="Enter Your Deck's Title"
+        placeholderTextColor="#9a73ef"
+        autoCapitalize="none"
+        onChangeText={ handleTextChange }
+      />
+
+      <TouchableOpacity
+        style={ styles.submitButton }
+        onPress={ handleSubmit }
+
+      >
+
+        <Text style={ styles.submitButtonText }> Submit </Text>
+      </TouchableOpacity>
+    </View>
+  );
+
 }
 
 export default AddDeck;
