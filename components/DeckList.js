@@ -6,20 +6,6 @@ import { getDecks } from '../utils/api'
 import Deck from './Deck'
 
 function DeckList() {
-  const [decks, setDecks] = useState([])
-
-  useEffect(() => {
-    const loadDecks = async () => {
-      const decksInStorage = await getDecks()
-      console.log(decksInStorage, decks.length);
-      if (!isEqual(decksInStorage, decks) || decks.length === 0)
-        setDecks(decksInStorage);
-    }
-
-    loadDecks();
-  }, []);
-
-
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -41,14 +27,23 @@ function DeckList() {
     },
   });
 
+  const [decks, setDecks] = useState([]);
+
+  useEffect(() => {
+    const loadDecks = async () => {
+      const decksInStorage = await getDecks();
+
+      if (!isEqual(decksInStorage, decks) || decks.length === 0)
+        setDecks(decksInStorage);
+    }
+
+    loadDecks();
+  }, []);
+
   return (
     <View style={ styles.container }>
       {
-        decks?.map(deck => (
-
-          <Deck key={ deck.id } deck={ deck } />
-
-        ))
+        decks?.map(deck => <Deck key={ deck.id } deck={ deck } />)
       }
     </View>
   );

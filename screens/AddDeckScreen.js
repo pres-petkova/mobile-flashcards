@@ -14,8 +14,8 @@ function AddDeckScreen({ navigation }) {
 
   const handleSubmit = async () => {
     if (title) {
-      await addDeck(title);
-      navigation.push("DeckScreen");
+      const newDeck = await addDeck(title);
+      navigation.push("DeckScreen", { deckId: newDeck.id });
     }
   };
 

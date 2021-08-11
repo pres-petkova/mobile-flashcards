@@ -1,6 +1,8 @@
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import React from "react";
-function Deck(props) {
+import { useNavigation } from '@react-navigation/native';
+
+function Deck({ deck, onPress }) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -22,14 +24,24 @@ function Deck(props) {
     }
   });
 
-  const deck = props?.deck;
+  const navigation = useNavigation();
 
   if (!deck) return null;
 
   return (
     <View style={ [styles.container, { flexDirection: 'row' }] }>
       <View style={ { flex: 1, } }>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={ () => navigation
+            .navigate(
+              "DeckNavigator",
+              {
+                screen: 'DeckScreen',
+                initial: false,
+                params: { deckId: deck.id }
+              }
+            ) }
+        >
           <Text>{ deck.title }</Text>
         </TouchableOpacity>
       </View>

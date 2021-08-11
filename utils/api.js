@@ -14,6 +14,8 @@ export const addDeck = async (title) => {
 
     decks.push(newDeck);
     await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks));
+
+    return newDeck;
   } catch (error) {
     console.log("ERROR", error);
   }
@@ -30,5 +32,17 @@ export const getDecks = async () => {
     }
   } catch (error) {
     console.log("ERROR", error);
+  }
+};
+
+export const getDeckById = async (id) => {
+  try {
+    const decks = await getDecks();
+
+    const deck = decks.find(item => id === item.id);
+    console.log('ahahahahaha', deck, decks, id, typeof id);
+    return deck;
+  } catch (error) {
+    console.log('ERROR', error);
   }
 };
