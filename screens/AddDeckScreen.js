@@ -9,15 +9,13 @@ import {
 } from "react-native";
 import { addDeck } from "../utils/api";
 
-function AddDeck({ navigation }) {
-
+function AddDeckScreen({ navigation }) {
   const [title, setTitle] = useState();
-
 
   const handleSubmit = async () => {
     if (title) {
       await addDeck(title);
-      navigation.push("Home");
+      navigation.push("DeckScreen");
     }
   };
 
@@ -43,6 +41,7 @@ function AddDeck({ navigation }) {
 
       >
 
+
         <Text style={ styles.submitButtonText }> Submit </Text>
       </TouchableOpacity>
     </View>
@@ -50,7 +49,7 @@ function AddDeck({ navigation }) {
 
 }
 
-export default AddDeck;
+export default AddDeckScreen;
 
 const styles = StyleSheet.create({
   container: {
