@@ -2,6 +2,8 @@ import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AddDeckScreen from "../screens/AddDeckScreen";
 import DeckScreen from "../screens/DeckScreen";
+import AddCardScreen from "../screens/AddCardScreen";
+import QuizScreen from "../screens/QuizScreen";
 
 const Stack = createStackNavigator();
 
@@ -16,6 +18,16 @@ function DeckNavigator() {
             <Stack.Screen
                 name="DeckScreen"
                 component={ DeckScreen }
+                options={ { unmountOnBlur: true } }
+            />
+            <Stack.Screen
+                name="AddCardScreen"
+                component={ AddCardScreen }
+                options={ { unmountOnBlur: true } }
+            />
+            <Stack.Screen
+                name="QuizScreen"
+                component={ QuizScreen }
                 options={ { unmountOnBlur: true } }
             />
         </Stack.Navigator>

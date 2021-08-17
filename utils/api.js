@@ -21,6 +21,29 @@ export const addDeck = async (title) => {
   }
 };
 
+export const addCard = async (deckId, question, answer) => {
+  try {
+    const decks = await getDecks();
+    const deckInStorage = decks.find(deck => deck.id === deckId);
+
+    if (!deckInStorage)
+      throw new Error('deck does not exist!');
+
+    const newCard = {
+      id: deckInStorage.cards.length + 1,
+      question: question,
+      answer: answer
+    };
+
+    deckInStorage.cards.push(newCard);
+    await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks));
+
+    return decks;
+  } catch (error) {
+    console.log('ERROR', error);
+  }
+}
+
 export const getDecks = async () => {
   try {
     const value = await AsyncStorage.getItem(DECKS_KEY);

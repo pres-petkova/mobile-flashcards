@@ -17,15 +17,23 @@ function DeckScreen({ route, navigation }) {
         };
 
         loadDeck();
+
     }, []);
 
+    const handleAddCard = () => {
+        navigation.push("AddCardScreen", { deckId })
+    }
+
+    const handleStartQuiz = () => {
+        navigation.push("QuizScreen", { deckId })
+    }
     return (
         <View>
             <Text>Deck Name: { deck?.title }</Text>
             <Text>number of cards: { deck?.cards?.length }</Text>
 
-            <Button title="Add Card" />
-            <Button title="Start Quiz" />
+            <Button title="Add Card" onPress={ handleAddCard } />
+            <Button title="Start Quiz" onPress={ handleStartQuiz } />
 
         </View>
     )

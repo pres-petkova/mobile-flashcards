@@ -38,11 +38,10 @@ function AddDeckScreen({ navigation }) {
       <TouchableOpacity
         style={ styles.submitButton }
         onPress={ handleSubmit }
-
       >
 
 
-        <Text style={ styles.submitButtonText }> Submit </Text>
+        <Text style={ styles.submitButtonText }> Create Deck </Text>
       </TouchableOpacity>
     </View>
   );
